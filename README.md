@@ -3,21 +3,21 @@
 | [![Travis][travis_shield]][travis]       | [![Github Release][release_shield]][github_release] | [![Github Version][version_shield]][github_version] | [![Github Last Commit][last_commit_shield]][github_last_commit] | [![Github commit activity][activity_shield]][github_activity] |
 
 
-[travis_shield]: https://travis-ci.org/skulumani/2018_sspi_manuscript.svg?branch=master
-[release_shield]: https://img.shields.io/github/release/skulumani/2018_sspi_manuscript.svg
-[version_shield]: https://badge.fury.io/gh/skulumani%2F2018_sspi_manuscript.svg
-[last_commit_shield]: https://img.shields.io/github/last-commit/skulumani/2018_sspi_manuscript.svg
-[activity_shield]: https://img.shields.io/github/commit-activity/y/skulumani/2018_sspi_manuscript.svg
+[travis_shield]: https://travis-ci.org/skulumani/2018_sspi_presentation.svg?branch=master
+[release_shield]: https://img.shields.io/github/release/skulumani/2018_sspi_presentation.svg
+[version_shield]: https://badge.fury.io/gh/skulumani%2F2018_sspi_presentation.svg
+[last_commit_shield]: https://img.shields.io/github/last-commit/skulumani/2018_sspi_presentation.svg
+[activity_shield]: https://img.shields.io/github/commit-activity/y/skulumani/2018_sspi_presentation.svg
 
-[travis]: https://travis-ci.org/skulumani/2018_sspi_manuscript
-[github_release]: https://github.com/skulumani/2018_sspi_manuscript/releases/latest
-[github_version]: https://badge.fury.io/gh/skulumani%2F2018_sspi_manuscript
-[github_last_commit]: https://github.com/skulumani/2018_sspi_manuscript/commits/master
-[github_activity]: https://github.com/skulumani/2018_sspi_manuscript/graphs/commit-activity
+[travis]: https://travis-ci.org/skulumani/2018_sspi_presentation
+[github_release]: https://github.com/skulumani/2018_sspi_presentation/releases/latest
+[github_version]: https://badge.fury.io/gh/skulumani%2F2018_sspi_presentation
+[github_last_commit]: https://github.com/skulumani/2018_sspi_presentation/commits/master
+[github_activity]: https://github.com/skulumani/2018_sspi_presentation/graphs/commit-activity
 
-## 2018 SSPI manuscript
+## 2018 SSPI presentation
 
-This is the manuscript for my submission to the 2018 SSPI competition. 
+This is the presentation for my submission to the 2018 SSPI competition. 
 
 ## License
 
