@@ -36,7 +36,7 @@
 } \setbeamercolor{box}{fg=black,bg=yellow}
 
 
-\title[Autonomous Landing]{\large\textbf Geometric Control for Autonomous Landing on Asteroid Itokawa using Visual Localization}
+\title[Asteroid Reconstruction]{\large\textbf Real Time asteroid reconstruction}
 
 \author{\vspace*{-0.3cm}}
    
@@ -68,11 +68,11 @@
     \item Impact - high risk from hazardous near-Earth asteroids
 \end{itemize}    
 
-% \begin{center}
-%     \includegraphics[height=0.35\textheight]{figures/near_mos_20001203_full.jpg}
-%     \hfill
-%     \includegraphics[height=0.35\textheight]{figures/Itokawa8_hayabusa_1210.jpg}
-% \end{center}
+\begin{center}
+    \includegraphics[height=0.35\textheight]{figures/near_mos_20001203_full.jpg}
+    \hfill
+    \includegraphics[height=0.35\textheight]{figures/Itokawa8_hayabusa_1210.jpg}
+\end{center}
 \end{frame}
 
 \begin{frame}{Asteroid Mining}
@@ -107,6 +107,64 @@
 
 \section*{}
 \subsection*{Motivation}  
+\begin{frame}{Asteroid Landing}
+    \begin{itemize}
+        \item Long history of asteroid/planetary missions
+            \begin{itemize}
+                \item NEAR, Hayabusa, OSIRIS-REX, Rosetta
+            \end{itemize}
+            \pause
+        \item Asteroid landing is particularly challenging:
+            \begin{itemize}
+                \item<3-> Challenging dynamics - unknown gravity enviornment
+                \item<4-> Poor shape model - unknown surface topography from the ground
+                \item<5-> Attitude coupling - pertubations are large 
+            \end{itemize}
+    \end{itemize}
+    \begin{center}
+        \includegraphics[width=0.6\textwidth,height=0.4\textheight,keepaspectratio]{figures/osiris_rex.png}~
+        \includegraphics[width=0.6\textwidth,height=0.4\textheight,keepaspectratio]{figures/Rosetta_Philae_Artist_Impression_Close_4k.jpg}
+    \end{center} 
+\end{frame}
+
+\begin{frame}{Challenges in Asteroid Missions}
+    \begin{itemize}
+        \item Very challenging dynamic enviornment
+            \begin{itemize}
+                \item Highly irregular shape and chaotic spin states
+                \item Difficult to identitfy and track from the ground
+                \item Poor understanding upon spacecraft arrival
+            \end{itemize}
+        \item Coupled translational and rotational dynamics
+            \begin{itemize}
+                \item Spacecraft is relatively large compared to the orbit radius
+                \item Complex interaction between the attitude and position forces
+                \item Magnified at lower altitudes and with highly irregular shapes
+            \end{itemize}
+        \item Critical to accurately model the gravitational force
+            \begin{itemize}
+                \item 
+            \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Problem Statement}
+\begin{enumerate}
+        \item Develop copuled equations of motion for a spacecraft
+        \item EOMs on \( \SE \) to derive landing control law
+            \begin{itemize}
+                \item \( \SE \) - special euclidean group describes the general motion of rigid bodies
+            \end{itemize}
+        \item Implement monocular localization to provide state estimates
+        \item Alleviates many of the issues of past approaches:
+            \pause
+            \begin{itemize}
+                \item Explicitly consider rotational dynamics
+                \item Geometric control defined directly on \( \SE \)
+                \item Onboard state measurements for ``autonomy''
+            \end{itemize}
+    \end{enumerate}
+\end{frame}
 
 \section*{}
 \subsection*{Conclusions}
