@@ -207,9 +207,46 @@
 
 \end{frame}
 
+\begin{frame}{LIDAR Measurements }
+    \begin{itemize}
+        \item Light radio detection and ranging used to measure distance to surface
+        \item Round trip time of flight gives accurate distance
+    \end{itemize}
+
+    \begin{center}
+        \includegraphics[width=0.75\textwidth]{figures/castalia_raycasting_plot.jpg}
+    \end{center}
+\end{frame}
+
 \begin{frame}{Shape Reconstruction}
+    \begin{itemize}
+        \item The radial distance of each vertx is normally distributed
+            \begin{align*}
+                v_i &\sim \mathcal{N}(r_i, w_i^2) \\
+                p_{j,i} &\sim \mathcal{N}(r_{j,i}, w_{j,i}^2)
+            \end{align*}
+        \item Each measurment is used to update the shape using Bayes rule 
+            \begin{align}
+                p(v_i | p_{j, i}) = \frac{p(p_{j, i} | v_i) p(v_i)}{p( p_{j, i})} \propto p(p_{j,i} | v_i) p(v_i).
+            \end{align}
+        \item The updated estimate best combines prior knowledge and the measurments
+    \begin{align}\label{eq:posterior_probability}
+        \mathcal{N} \parenth{\frac{w_{j, i}^2 r_i + w_i^2 r_{j, i}}{w_i^2 + w_{j, i}^2} , \frac{w_i^2  w_{j, i}^2}{w_i^2 +  w_{j, i}^2}} .
+    \end{align}
+    \end{itemize}
+\end{frame}
+
+\section*{}
+\subsection*{Numerical Results}
+
+\begin{frame}{4769 Castalia reconstruction}
+    \movie[width=8cm,height=4.5cm]{Castalia}{./videos/castalia.mp4}
+\end{frame}
+
+\begin{frame}{24513 Itokawa reconstruction}
 
 \end{frame}
+
 \section*{}
 \subsection*{Conclusions}
 
