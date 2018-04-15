@@ -42,7 +42,7 @@
    
 \institute{
 	\footnotesize
-	{\normalsize\bf{Shankar Kulumani, Kuya Takami \\ Taeyoung Lee}}\\
+	{\normalsize\bf{Shankar Kulumani\\ Advisor: Taeyoung Lee}}\\
 	\vspace*{0.2cm}
   	\textbf{Department of Mechanical \& Aerospace Engineering}\\ \vspace*{0.5cm}
  	\begin{figure} %figure%
@@ -240,11 +240,9 @@
 \subsection*{Numerical Results}
 
 \begin{frame}{4769 Castalia reconstruction}
-    \movie[width=8cm,height=4.5cm]{Castalia}{./videos/castalia.mp4}
-\end{frame}
-
-\begin{frame}{24513 Itokawa reconstruction}
-
+    \begin{center}
+        \movie[width=0.8\textwidth,height=0.8\textheight,externalviewer]{\includegraphics[width=0.8\textwidth,height=0.8\textheight, keepaspectratio]{figures/castalia/partial_weights_2047.jpg}}{./videos/castalia.mp4}
+\end{center}
 \end{frame}
 
 \section*{}
@@ -252,13 +250,12 @@
 
 \begin{frame}{Conclusions}
     \begin{itemize}
-        \item Nonlinear controller for landing on an asteroid
-        \item Coupled dynamics derived and considered on \SE
-        \item Localization performed using simulated monocular imagery
+        \item Real time asteroid shape reconstruction 
+        \item Each measurement is used to locally update the mesh
         \item Future Research Goals:
             \begin{itemize}
                 \item Utilize state estimates directly in controller
-                \item Update shape and gravity model in real-time
+                \item Design a trajectory to best reconstruct the shape
             \end{itemize}
     \end{itemize} 
 \end{frame}
