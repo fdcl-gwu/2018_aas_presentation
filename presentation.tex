@@ -36,13 +36,13 @@
 } \setbeamercolor{box}{fg=black,bg=yellow}
 
 
-\title[Asteroid Reconstruction]{\large\textbf Real Time asteroid reconstruction}
+\title[Asteroid Reconstruction]{\large\textbf Real Time Adaptive Shape Reconstruction for Asteroid Landing}
 
 \author{\vspace*{-0.3cm}}
    
 \institute{
 	\footnotesize
-	{\normalsize\bf{Shankar Kulumani\\ Advisor: Taeyoung Lee}}\\
+	{\normalsize\bf{Shankar Kulumani}}\\
 	\vspace*{0.2cm}
   	\textbf{Department of Mechanical \& Aerospace Engineering}\\ \vspace*{0.5cm}
  	\begin{figure} %figure%
@@ -243,16 +243,16 @@
 
 \begin{frame}{Bayesian Shape Reconstruction}
     \begin{itemize}
-        \item The radial distance of each vertex is normally distributed 
+        \item<1-> Framework for combining prior and new data 
+            \begin{itemize}
+                \item Each vertex has an uncertainty -- \( w_i\)
+                \item Each measurement has contains some error -- \( w_{j, i} \)
+            \end{itemize}
             \begin{align*}
-                v_i &\sim \mathcal{N}(r_i, w_i^2) \\
-                p_{j,i} &\sim \mathcal{N}(r_{j,i}, w_{j,i}^2)
+                v_i \sim \mathcal{N}(r_i, w_i^2) , \quad
+                p_{j,i} \sim \mathcal{N}(r_{j,i}, w_{j,i}^2)
             \end{align*}
-        \item Each measurement is used to update the shape using Bayes rule 
-            \begin{align*}
-                p(v_i | p_{j, i}) = \frac{p(p_{j, i} | v_i) p(v_i)}{p( p_{j, i})} \propto p(p_{j,i} | v_i) p(v_i).
-            \end{align*}
-        \item Updated estimate combines new data with prior knowledge
+        \item<2-> New data used to update each vertex and reduce uncertainty
     \begin{align*}\label{eq:posterior_probability}
         \mathcal{N} \parenth{\frac{w_{j, i}^2 r_i + w_i^2 r_{j, i}}{w_i^2 + w_{j, i}^2} , \frac{w_i^2  w_{j, i}^2}{w_i^2 +  w_{j, i}^2}} .
     \end{align*}
