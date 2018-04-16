@@ -49,7 +49,7 @@
        	\includegraphics[width=0.75\textwidth]{gw_txh_2cs_pos}
   	\end{figure}
 }
-\date{August 23, 2017}
+\date{20180421}
 
 \begin{document}
 %=======================================================%
@@ -63,16 +63,18 @@
 \subsection*{Introduction}  
 \begin{frame}{Asteroid Missions}
 \begin{itemize}
-    \item Science - insight into the early formation of the solar system
-    \item Mining - vast quantities of useful materials
-    \item Impact - high risk from hazardous near-Earth asteroids
+    \item<1-> Science - insight into the early formation of the solar system
+    \item<2-> Mining - vast quantities of useful materials
+    \item<3-> Impact - high risk from hazardous near-Earth asteroids
 \end{itemize}    
 
+\visible<1->{
 \begin{center}
     \includegraphics[height=0.35\textheight]{figures/near_mos_20001203_full.jpg}
     \hfill
     \includegraphics[height=0.35\textheight]{figures/Itokawa8_hayabusa_1210.jpg}
 \end{center}
+}
 \end{frame}
 
 \begin{frame}{Asteroid Mining}
@@ -116,9 +118,9 @@
             \pause
         \item Asteroid landing is particularly challenging:
             \begin{itemize}
-                \item<3-> Challenging dynamics - unknown gravity enviornment
-                \item<4-> Poor shape model - unknown surface topography from the ground
-                \item<5-> Attitude coupling - pertubations are large 
+                \item<2-> Challenging dynamics - unknown gravity enviornment
+                \item<2-> Poor shape model - unknown surface topography
+                \item<2-> Attitude coupling - pertubations are large 
             \end{itemize}
     \end{itemize}
     \begin{center}
@@ -129,62 +131,75 @@
 
 \begin{frame}{Challenges in Asteroid Missions}
     \begin{itemize}
-        \item Very challenging dynamic enviornment
+        \item<1->  Challenging dynamic enviornment
             \begin{itemize}
-                \item Highly irregular shape and chaotic spin states
-                \item Difficult to identitfy and track from the ground
-                \item Poor understanding upon spacecraft arrival
+                \item<1-> Highly irregular shape and chaotic spin states
+                \item<1-> Difficult to identitfy and track from the ground
+                \item<1-> Poor understanding upon spacecraft arrival
             \end{itemize}
-        \item Coupled translational and rotational dynamics
+        \item<2-> Coupled translational and rotational dynamics
             \begin{itemize}
                 \item Spacecraft is relatively large compared to the orbit radius
                 \item Complex interaction between the attitude and position forces
                 \item Magnified at lower altitudes and with highly irregular shapes
             \end{itemize}
-        \item Critical to accurately model the gravitational force
+        \item<3-> Gravity is the primary perturbing force
             \begin{itemize}
                 \item Polyhedron potential model is the standard approach 
                 \item Accurate shape model is critical for accurate gravity model
                 \item In situ measurements are required for accurate shape model
             \end{itemize}
     \end{itemize}
-
-    \begin{block}{ Shape Model }
-        Generating the shape of the asteroid is critial
-    \end{block}
+   
+    \onslide<3>{
+        \begin{block}{}
+            \begin{center}
+            Shape Model \( \to \) Gravity Model
+        \end{center}
+        \end{block}
+    }
 \end{frame}
 
 \begin{frame}{Asteroid Shape Modeling}
     \begin{itemize}
-        \item Ground radar used to compute the 3D shape of teh asteroid
+        \item<1-> Ground radar used to compute the 3D shape of the asteroid
         \begin{itemize}
             \item Computationally intensive estimation algorithm 
-            \item Inspite of the effort, the result is still coarse and only an approximation
-            \item This model is not accurate enough for low altitude or landing operations
+            \item The result is still coarse and only an approximation
+            \item Not accurate enough for low altitude or landing operations
         \end{itemize}
-    \item Estimating the shape is the first step of all current asteroid missions
+    \item<2-> Estimating the asteroid shape is the first step of any mission
     \begin{itemize}
-        \item Months or years are devoted solely to meausring the surface
+        \item Months or years are devoted solely to measuring the surface
         \item Laser ranging used to accurately measure relative distance
         \item All data is sent to the ground for processing
     \end{itemize}
     \end{itemize}
-
-    \begin{block}{Real time Shape Generation}
-        Generate the shape on-board the spacecraft
-    \end{block}
+    
+    \onslide<3->{
+        \begin{block}{}
+            \begin{center}
+                Real-time on board shape estimation
+            \end{center}
+        \end{block}
+    }
 \end{frame}
 
 \begin{frame}{Problem Statement}
 \begin{enumerate}
-    \item Compute the surface shape from range measurements
+    \item<1-> Compute the surface shape from range measurements
         \begin{itemize}
             \item Real time and incrementally build the shape
         \end{itemize}
-    \item Updated shape model is used in dynamics and controller
+    \item<2-> Utilize shape model in dynamics and controller
         \begin{itemize}
             \item Coupled equations of motion 
-            \item Nonlinear controller for manuevering and landing
+            \item Nonlinear controller for maneuvering and landing
+        \end{itemize}
+    \item<3-> Autonomously navigate around asteroid 
+        \begin{itemize}
+            \item Locate areas of poor knowledge for additional measurements
+            \item Avoid obstacles or hazards
         \end{itemize}
 \end{enumerate}
 \end{frame}
@@ -199,40 +214,48 @@
     \item Exact potential assumes a constant density 
     \item Accuracy solely dependent on shape model
 \end{itemize}
-\only<2>{
-\begin{align*}\label{eq:potential}
+
+\visible<2>{
+\begin{align*}
     U(\vecbf{r}) &= \frac{1}{2} G \sigma \sum_{e \in \text{edges}} \vecbf{r}_e \cdot \vecbf{E}_e \cdot \vecbf{r}_e \cdot L_e - \frac{1}{2}G \sigma \sum_{f \in \text{faces}} \vecbf{r}_f \cdot \vecbf{F}_f \cdot \vecbf{r}_f \cdot \omega_f 
 \end{align*}
 }
-
+\begin{center}
+    \includegraphics[width=0.5\textwidth,keepaspectratio]{figures/castalia/partial_2047.jpg}
+\end{center}
 \end{frame}
 
 \begin{frame}{LIDAR Measurements }
     \begin{itemize}
-        \item Light radio detection and ranging used to measure distance to surface
-        \item Round trip time of flight gives accurate distance
+        \item<1-> Laser pulse used to measure relative distance to surface
+        \item<2-> Accurate timing gives the round trip time of flight
+            \begin{align*}
+                d = \frac{\Delta t}{2 c}
+            \end{align*}
     \end{itemize}
-
+    
+    \visible<2->{
     \begin{center}
         \includegraphics[width=0.75\textwidth]{figures/castalia_raycasting_plot.jpg}
     \end{center}
+}
 \end{frame}
 
-\begin{frame}{Shape Reconstruction}
+\begin{frame}{Bayesian Shape Reconstruction}
     \begin{itemize}
-        \item The radial distance of each vertx is normally distributed
+        \item The radial distance of each vertex is normally distributed 
             \begin{align*}
                 v_i &\sim \mathcal{N}(r_i, w_i^2) \\
                 p_{j,i} &\sim \mathcal{N}(r_{j,i}, w_{j,i}^2)
             \end{align*}
-        \item Each measurment is used to update the shape using Bayes rule 
-            \begin{align}
+        \item Each measurement is used to update the shape using Bayes rule 
+            \begin{align*}
                 p(v_i | p_{j, i}) = \frac{p(p_{j, i} | v_i) p(v_i)}{p( p_{j, i})} \propto p(p_{j,i} | v_i) p(v_i).
-            \end{align}
-        \item The updated estimate best combines prior knowledge and the measurments
-    \begin{align}\label{eq:posterior_probability}
+            \end{align*}
+        \item Updated estimate combines new data with prior knowledge
+    \begin{align*}\label{eq:posterior_probability}
         \mathcal{N} \parenth{\frac{w_{j, i}^2 r_i + w_i^2 r_{j, i}}{w_i^2 + w_{j, i}^2} , \frac{w_i^2  w_{j, i}^2}{w_i^2 +  w_{j, i}^2}} .
-    \end{align}
+    \end{align*}
     \end{itemize}
 \end{frame}
 
