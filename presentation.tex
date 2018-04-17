@@ -17,23 +17,43 @@
 
 \mode<presentation> 
 {
-  \usetheme{Warsaw}
-  \usefonttheme{serif}
-  \setbeamercovered{transparent}
+    \usetheme[hideothersubsections,width=3.5\baselineskip]{Berkeley}
+    \usefonttheme{serif}
+    \setbeamercovered{transparent}
+    \setbeamerfont{section in sidebar}{size=\scriptsize}
+    \setbeamerfont{subsection in sidebar}{size=\tiny}
 }
+
+\makeatletter
+\beamer@headheight=1.5\baselineskip
+
+\setbeamertemplate{sidebar \beamer@sidebarside}%{sidebar theme}
+  {
+    \beamer@tempdim=\beamer@sidebarwidth%
+    \advance\beamer@tempdim by -6pt%
+    \insertverticalnavigation{\beamer@sidebarwidth}%
+    \vfill
+    \ifx\beamer@sidebarside\beamer@lefttext%
+    \else%
+      \usebeamercolor{normal text}%
+      \llap{\usebeamertemplate***{navigation symbols}\hskip0.1cm}%
+      \vskip2pt%
+    \fi%
+}%
 
 \setbeamertemplate{footline}%{split theme}
 {%
   \leavevmode%
-  \hbox{\begin{beamercolorbox}[wd=.5\paperwidth,ht=2.5ex,dp=1.125ex,leftskip=.3cm,rightskip=.3cm plus1fill]{author in head/foot}%
-    \usebeamerfont{author in head/foot}\insertshorttitle
-  \end{beamercolorbox}%
-  \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.5ex,dp=1.125ex,leftskip=.3cm,rightskip=.3cm]{title in head/foot}
+  \begin{beamercolorbox}[wd=1\paperwidth,ht=2.5ex,dp=1.125ex,leftskip=.3cm,rightskip=.3cm]{title in head/foot}
 %    \usebeamerfont{title in head/foot}\mypaper\hfill \insertframenumber/\inserttotalframenumber
-    \usebeamerfont{title in head/foot}\hfill \insertframenumber/\inserttotalframenumber
-  \end{beamercolorbox}}%
-  \vskip0pt%
-} \setbeamercolor{box}{fg=black,bg=yellow}
+    \usebeamerfont{title in head/foot}\insertshorttitle \hfill \insertframenumber/\inserttotalframenumber
+  \end{beamercolorbox}
+} 
+\setbeamertemplate{blocks}[rounded][shadow=true]
+\setbeamertemplate{title page}[default][shadow=true,rounded=true]
+\setbeamercolor{box}{fg=black,bg=yellow}
+\setbeamertemplate{navigation symbols}{}
+\makeatother
 
 
 \title[Asteroid Reconstruction]{\large\textbf Real Time Adaptive Shape Reconstruction for Asteroid Landing}
@@ -51,6 +71,8 @@
 }
 \date{20180421}
 
+\logo{\includegraphics[scale=0.2]{figures/gw_atx_2cs_rev.pdf}}
+
 \begin{document}
 %=======================================================%
 
@@ -59,8 +81,8 @@
   \titlepage
 \end{frame}   %-----------------------------%
 
-\section*{}
-\subsection*{Introduction}  
+\section[Introduction]{Introduction}
+\subsection[Motivation]{Asteroid Missions}  
 \begin{frame}{Asteroid Missions}
 \begin{itemize}
     \item<1-> Science - insight into the early formation of the solar system
@@ -107,8 +129,7 @@
 
 \end{frame}
 
-\section*{}
-\subsection*{Motivation}  
+\subsection[Landing]{Asteroid Landing}  
 \begin{frame}{Asteroid Landing}
     \begin{itemize}
         \item Long history of asteroid/planetary missions
@@ -129,6 +150,7 @@
     \end{center} 
 \end{frame}
 
+\subsection[Challenges]{Asteroid Challenges}
 \begin{frame}{Challenges in Asteroid Missions}
     \begin{itemize}
         \item<1->  Challenging dynamic enviornment
@@ -160,6 +182,7 @@
     }
 \end{frame}
 
+\subsection[Shape Model]{Shape Model}
 \begin{frame}{Asteroid Shape Modeling}
     \begin{itemize}
         \item<1-> Ground radar used to compute the 3D shape of the asteroid
@@ -185,6 +208,7 @@
     }
 \end{frame}
 
+\section[Math]{Math Background}
 \begin{frame}{Problem Statement}
 \begin{enumerate}
     \item<1-> Compute the surface shape from range measurements
@@ -204,8 +228,8 @@
 \end{enumerate}
 \end{frame}
 
-\section*{}
-\subsection*{Mathematical Background}
+\subsection[Gravity Model]{Gravity Model}
+
 \begin{frame}{Polyhedron Gravitation Model}
 
 \begin{itemize}
@@ -226,6 +250,7 @@
 \end{center}
 \end{frame}
 
+\subsection[LIDAR]{Range measurements}
 \begin{frame}{LIDAR Measurements }
     \begin{itemize}
         \item<1-> Laser pulse used to measure relative distance to surface
@@ -247,7 +272,7 @@
         \item<1-> Framework for combining prior and new data 
             \begin{itemize}
                 \item Each vertex has an uncertainty -- \( w_i\)
-                \item Each measurement has contains some error -- \( w_{j, i} \)
+                \item Each measurement contains error -- \( w_{j, i} \)
             \end{itemize}
             \begin{align*}
                 v_i \sim \mathcal{N}(r_i, w_i^2) , \quad
@@ -263,49 +288,47 @@
 \section*{}
 \subsection*{Numerical Results}
 
-\begin{frame}{4769 Castalia reconstruction}
-    \begin{center}
-        \movie[width=0.8\textwidth,height=0.8\textheight,externalviewer]{\includegraphics[width=0.8\textwidth,height=0.8\textheight, keepaspectratio]{figures/castalia/partial_weights_2047.jpg}}{./videos/castalia.mp4}
-\end{center}
-\end{frame}
 
-\begin{frame}{4769 Castalia}
+\begin{frame}{4769 Castalia }
     \begin{columns}
         \begin{column}{0.5\textwidth}
             \centering
+            True Shape
             \includemedia[
             label=castalia,
             3Dviews=animation/castalia.vws,
-            width=0.5\textwidth,height=0.6\textheight,
             3Dmenu, 
             3Dc2c=-1 0 0,
             3Dcoo=0.04557958245277405 -0.03455224633216858 -0.017790749669075012,
             3Droo=4.029169586482155,
             3Dlights=Headlamp,
             % add3Djscript=animation/castalia.js
-            ]{\includegraphics[width=0.5\textwidth,height=0.6\textheight,keepaspectratio]{figures/castalia/partial_2047.jpg}}{animation/castalia.u3d}
+            ]{\includegraphics[width=\columnwidth,height=0.8\textheight,keepaspectratio]{figures/castalia/partial_2047.jpg}}{animation/castalia.u3d}
 
-            \mediabutton[3Dgotoview=castalia:N]{\fbox{Next view}}
-            \mediabutton[3Dgotoview=castalia:(Back)]{\fbox{Prev view}}
+            \mediabutton[3Dgotoview=castalia:(Back)]{\beamerbutton{Prev view}}
+            \mediabutton[3Dgotoview=castalia:N]{\beamerbutton{Next view}}
         \end{column}
         \begin{column}{0.5\textwidth}
             \centering
+            Reconstructed Shape
             \includemedia[
             label=castalia_reconstruction,
             3Dviews=animation/castalia.vws,
-            width=0.5\textwidth,height=0.6\textheight,
             3Dmenu, 
             3Dc2c=-1 0 0,
             3Dcoo=0.04557958245277405 -0.03455224633216858 -0.017790749669075012,
             3Droo=4.029169586482155,
             3Dlights=Headlamp,
             % add3Djscript=animation/castalia.js
-            ]{\includegraphics[width=0.5\textwidth,height=0.6\textheight,keepaspectratio]{figures/castalia/partial_2047.jpg}}{animation/castalia_reconstruction.u3d}
+            ]{\includegraphics[width=\columnwidth,height=0.8\textheight,keepaspectratio]{figures/castalia/partial_2047.jpg}}{animation/castalia_reconstruction.u3d}
 
-            \mediabutton[3Dgotoview=castalia_reconstruction:N]{\fbox{Next view}}
-            \mediabutton[3Dgotoview=castalia_reconstruction:(Back)]{\fbox{Prev view}}
+            \mediabutton[3Dgotoview=castalia_reconstruction:(Back)]{\beamerbutton{Prev view}}
+            \mediabutton[3Dgotoview=castalia_reconstruction:N]{\beamerbutton{Next view}}
         \end{column}
     \end{columns}
+    \vfill
+    \hfill \movie[externalviewer]{\beamerbutton{Video}}{./videos/castalia.mp4}
+
 \end{frame}
 
 \begin{frame}{25143 Itokawa}
@@ -313,39 +336,41 @@
     \begin{columns}
         \begin{column}{0.5\textwidth}
             \centering
+            True Shape
             \includemedia[
             label=itokawa,
             3Dviews=animation/itokawa.vws,
-            width=0.5\textwidth,height=0.6\textheight,
             3Dmenu, 
             3Dc2c=-1 0 0,
             3Dcoo=-0.025140970945358276 0.002201750874519348 -0.002508975565433502,
             3Droo=1.32135384972625,
             3Dlights=Headlamp,
             % add3Djscript=animation/castalia.js
-            ]{\includegraphics[width=0.5\textwidth,height=0.6\textheight,keepaspectratio]{figures/itokawa/partial_25349.jpg}}{animation/itokawa.u3d}
+            ]{\includegraphics[width=\columnwidth,height=0.8\textheight,keepaspectratio]{figures/itokawa/partial_25349.jpg}}{animation/itokawa.u3d}
 
-            \mediabutton[3Dgotoview=itokawa:N]{\fbox{Next view}}
-            \mediabutton[3Dgotoview=itokawa:(Back)]{\fbox{Prev view}}
+            \mediabutton[3Dgotoview=itokawa:(Back)]{\beamerbutton{Prev view}}
+            \mediabutton[3Dgotoview=itokawa:N]{\beamerbutton{Next view}}
         \end{column}
         \begin{column}{0.5\textwidth}
             \centering
+            Reconstructed Shape
             \includemedia[
             label=itokawa_reconstruction,
             3Dviews=animation/itokawa.vws,
-            width=0.5\textwidth,height=0.6\textheight,
             3Dmenu, 
             3Dc2c=-1 0 0,
             3Dcoo=-0.025140970945358276 0.002201750874519348 -0.002508975565433502,
             3Droo=1.32135384972625,
             3Dlights=Headlamp,
             % add3Djscript=animation/castalia.js
-            ]{\includegraphics[width=0.5\textwidth,height=0.6\textheight,keepaspectratio]{figures/itokawa/partial_25349.jpg}}{animation/itokawa_reconstruction.u3d}
+            ]{\includegraphics[width=\columnwidth,height=0.6\textheight,keepaspectratio]{figures/itokawa/partial_25349.jpg}}{animation/itokawa_reconstruction.u3d}
 
-            \mediabutton[3Dgotoview=itokawa_reconstruction:N]{\fbox{Next view}}
-            \mediabutton[3Dgotoview=itokawa_reconstruction:(Back)]{\fbox{Prev view}}
+            \mediabutton[3Dgotoview=itokawa_reconstruction:(Back)]{\beamerbutton{Prev view}}
+            \mediabutton[3Dgotoview=itokawa_reconstruction:N]{\beamerbutton{Next view}}
         \end{column}
     \end{columns}
+    \vfill
+    \hfill \movie[externalviewer]{\beamerbutton{Video}}{./videos/itokawa.mp4}
 \end{center}
 \end{frame}
 \section*{}
