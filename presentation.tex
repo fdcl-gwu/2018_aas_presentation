@@ -17,7 +17,7 @@
 
 \mode<presentation> 
 {
-    \usetheme[hideothersubsections,width=3.5\baselineskip]{Berkeley}
+    \usetheme[hideothersubsections,width=3\baselineskip]{Berkeley}
     \usefonttheme{serif}
     \setbeamercovered{transparent}
     \setbeamerfont{section in sidebar}{size=\scriptsize}
@@ -145,8 +145,8 @@
             \end{itemize}
     \end{itemize}
     \begin{center}
-        \includegraphics[width=0.6\textwidth,height=0.4\textheight,keepaspectratio]{figures/osiris_rex.png}~
-        \includegraphics[width=0.6\textwidth,height=0.4\textheight,keepaspectratio]{figures/Rosetta_Philae_Artist_Impression_Close_4k.jpg}
+        \includegraphics[width=0.5\textwidth,height=0.3\textheight,keepaspectratio]{figures/osiris_rex.png}~
+        \includegraphics[width=0.5\textwidth,height=0.3\textheight,keepaspectratio]{figures/Rosetta_Philae_Artist_Impression_Close_4k.jpg}
     \end{center} 
 \end{frame}
 
@@ -161,15 +161,15 @@
             \end{itemize}
         \item<2-> Coupled translational and rotational dynamics
             \begin{itemize}
-                \item Spacecraft is relatively large compared to the orbit radius
-                \item Complex interaction between the attitude and position forces
-                \item Magnified at lower altitudes and with highly irregular shapes
+                \item Spacecraft is large compared to the orbit radius
+                \item Complex interaction of attitude/translation forces
+                \item Magnified at lower altitudes or highly irregular shapes
             \end{itemize}
         \item<3-> Gravity is the primary perturbing force
             \begin{itemize}
                 \item Polyhedron potential model is the standard approach 
-                \item Accurate shape model is critical for accurate gravity model
-                \item In situ measurements are required for accurate shape model
+                \item Accurate shape model is critical for accurate gravity
+                \item In situ measurements are required to find shape
             \end{itemize}
     \end{itemize}
    
@@ -193,8 +193,8 @@
         \end{itemize}
     \item<2-> Estimating the asteroid shape is the first step of any mission
     \begin{itemize}
-        \item Months or years are devoted solely to measuring the surface
-        \item Laser ranging used to accurately measure relative distance
+        \item Months or years are devoted solely to mapping
+        \item Laser ranging used to accurately measure distance
         \item All data is sent to the ground for processing
     \end{itemize}
     \end{itemize}
@@ -208,7 +208,7 @@
     }
 \end{frame}
 
-\section[Math]{Math Background}
+\section[Problem Statement]{Math Background}
 \begin{frame}{Problem Statement}
 \begin{enumerate}
     \item<1-> Compute the surface shape from range measurements
@@ -240,7 +240,9 @@
 \end{itemize}
 \visible<2>{
 \begin{align*}
-    U(\vecbf{r}) &= \frac{1}{2} G \sigma \sum_{e \in \text{edges}} \vecbf{r}_e \cdot \vecbf{E}_e \cdot \vecbf{r}_e \cdot L_e - \frac{1}{2}G \sigma \sum_{f \in \text{faces}} \vecbf{r}_f \cdot \vecbf{F}_f \cdot \vecbf{r}_f \cdot \omega_f 
+    \tiny
+    U(\vecbf{r}) =& \frac{1}{2} G \sigma \sum_{e \in \text{edges}} \vecbf{r}_e \cdot \vecbf{E}_e \cdot \vecbf{r}_e \cdot L_e \\
+                 &- \frac{1}{2}G \sigma \sum_{f \in \text{faces}} \vecbf{r}_f \cdot \vecbf{F}_f \cdot \vecbf{r}_f \cdot \omega_f 
 \end{align*}
 }
 \vspace*{-0.6cm}
@@ -267,6 +269,7 @@
 }
 \end{frame}
 
+\subsection[Reconstruction]{Bayesian Reconstruction}
 \begin{frame}{Bayesian Shape Reconstruction}
     \begin{itemize}
         \item<1-> Framework for combining prior and new data 
@@ -285,9 +288,9 @@
     \end{itemize}
 \end{frame}
 
-\section*{}
-\subsection*{Numerical Results}
+\section[Results]{Numerical Results}
 
+\subsection[4769 Castalia]{4769 Castalia}
 
 \begin{frame}{4769 Castalia }
     \begin{columns}
@@ -331,6 +334,7 @@
 
 \end{frame}
 
+\subsection[25143 Itokawa]{25143 Itokawa}
 \begin{frame}{25143 Itokawa}
     \begin{center}
     \begin{columns}
@@ -373,8 +377,7 @@
     \hfill \movie[externalviewer]{\beamerbutton{Video}}{./videos/itokawa.mp4}
 \end{center}
 \end{frame}
-\section*{}
-\subsection*{Conclusions}
+\section[Conclusions]{Conclusions}
 
 \begin{frame}{Conclusions}
     \begin{itemize}
