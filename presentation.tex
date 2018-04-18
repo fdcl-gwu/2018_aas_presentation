@@ -1,6 +1,6 @@
 %\documentclass[11pt,professionalfonts,hyperref={pdftex,pdfpagemode=none,pdfstartview=FitH}]{beamer}
 %\usepackage{times}
-\documentclass[11pt,professionalfonts]{beamer}
+\documentclass[11pt,professionalfonts,aspectratio=169]{beamer}
 \usefonttheme{serif}
 \usepackage{presentation_packages}
 \usepackage[version=3]{mhchem}
@@ -17,7 +17,7 @@
 
 \mode<presentation> 
 {
-    \usetheme[hideothersubsections,width=3\baselineskip]{Berkeley}
+    \usetheme[hideothersubsections,width=3.5\baselineskip]{Berkeley}
     \usefonttheme{serif}
     \setbeamercovered{transparent}
     \setbeamerfont{section in sidebar}{size=\scriptsize}
@@ -92,9 +92,9 @@
 
 \visible<1->{
 \begin{center}
-    \includegraphics[height=0.35\textheight]{figures/near_mos_20001203_full.jpg}
+    \includegraphics[height=0.5\textheight]{figures/near_mos_20001203_full.jpg}
     \hfill
-    \includegraphics[height=0.35\textheight]{figures/Itokawa8_hayabusa_1210.jpg}
+    \includegraphics[height=0.5\textheight]{figures/Itokawa8_hayabusa_1210.jpg}
 \end{center}
 }
 \end{frame}
@@ -145,8 +145,8 @@
             \end{itemize}
     \end{itemize}
     \begin{center}
-        \includegraphics[width=0.5\textwidth,height=0.3\textheight,keepaspectratio]{figures/osiris_rex.png}~
-        \includegraphics[width=0.5\textwidth,height=0.3\textheight,keepaspectratio]{figures/Rosetta_Philae_Artist_Impression_Close_4k.jpg}
+        \includegraphics[width=0.5\textwidth,height=0.4\textheight,keepaspectratio]{figures/osiris_rex.png}~
+        \includegraphics[width=0.5\textwidth,height=0.4\textheight,keepaspectratio]{figures/Rosetta_Philae_Artist_Impression_Close_4k.jpg}
     \end{center} 
 \end{frame}
 
@@ -185,17 +185,17 @@
 \subsection[Shape Model]{Shape Model}
 \begin{frame}{Asteroid Shape Modeling}
     \begin{itemize}
-        \item<1-> Ground radar used to compute the 3D shape
+        \item<1-> Ground radar used to compute the 3D shape of the asteroid
         \begin{itemize}
-            \item Computationally intensive estimation algorithm 
-            \item The result is still coarse and only an approximation
-            \item Not accurate enough for low altitude or landing
+            \item Computationally intensive estimation algorithm completed on the ground 
+            \item The result is still coarse and only an approximation solution
+            \item Not accurate enough for low altitude or landing operations
         \end{itemize}
-    \item<2-> Estimating the asteroid shape is the first step
+    \item<2-> Estimating the asteroid shape is the first step of any mission
     \begin{itemize}
-        \item Months or years are devoted solely to mapping
-        \item Laser ranging used to accurately measure distance
-        \item All data is sent to the ground for processing
+        \item Months or years are devoted solely to mapping the surface
+        \item Laser ranging used to accurately measure relative distance 
+        \item All data is sent to the ground for processing (time and manpower intensive)
     \end{itemize}
     \end{itemize}
     
@@ -240,12 +240,10 @@
 \end{itemize}
 \visible<2>{
 \begin{align*}
-    \tiny
-    U(\vecbf{r}) =& \frac{1}{2} G \sigma \sum_{e \in \text{edges}} \vecbf{r}_e \cdot \vecbf{E}_e \cdot \vecbf{r}_e \cdot L_e \\
-                 &- \frac{1}{2}G \sigma \sum_{f \in \text{faces}} \vecbf{r}_f \cdot \vecbf{F}_f \cdot \vecbf{r}_f \cdot \omega_f 
+    U(\vecbf{r}) =& \frac{1}{2} G \sigma \sum_{e \in \text{edges}} \vecbf{r}_e \cdot \vecbf{E}_e \cdot \vecbf{r}_e \cdot L_e - \frac{1}{2}G \sigma \sum_{f \in \text{faces}} \vecbf{r}_f \cdot \vecbf{F}_f \cdot \vecbf{r}_f \cdot \omega_f 
 \end{align*}
 }
-\vspace*{-0.6cm}
+\vspace*{-0.8cm}
 \begin{center}
     \includegraphics[width=0.5\textwidth,keepaspectratio]{figures/castalia/partial_2047.jpg}~
     \includegraphics[width=0.5\textwidth,keepaspectratio]{figures/itokawa/partial_25349.jpg}
@@ -264,7 +262,7 @@
     
     \visible<2->{
     \begin{center}
-        \includegraphics[width=0.75\textwidth]{figures/castalia_raycasting_plot.jpg}
+        \includegraphics[width=0.75\textwidth,height=0.7\textheight,keepaspectratio]{figures/castalia_raycasting_plot.jpg}
     \end{center}
 }
 \end{frame}
@@ -274,8 +272,8 @@
     \begin{itemize}
         \item<1-> Framework for combining prior and new data 
             \begin{itemize}
-                \item Each vertex has an uncertainty -- \( w_i\)
-                \item Each measurement contains error -- \( w_{j, i} \)
+                \item Each vertex has an uncertainty -- \( w_i\) in the radial distance
+                \item Each measurement contains error -- \( w_{j, i} \) with respect to each vertex
             \end{itemize}
             \begin{align*}
                 v_i \sim \mathcal{N}(r_i, w_i^2) , \quad
@@ -391,8 +389,8 @@
     \end{itemize} 
 
     \begin{center}
-        \includegraphics[width=0.5\textwidth,keepaspectratio]{figures/castalia/final_az=45_el=30.jpg}~
-        \includegraphics[width=0.5\textwidth, keepaspectratio]{figures/itokawa/final_az=45_el=30.jpg}
+        \includegraphics[width=0.5\textwidth,keepaspectratio,height=0.5\textheight]{figures/castalia/final_az=45_el=30.jpg}~
+        \includegraphics[width=0.5\textwidth, keepaspectratio,height=0.5\textheight]{figures/itokawa/final_az=45_el=30.jpg}
     \end{center}
 \end{frame}
 
