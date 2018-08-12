@@ -1,0 +1,109 @@
+% AAS PRESENTATION PACKAGES
+\ProvidesPackage{defense_packages}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% DEFINE USEFUL PACKAGES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% OBSOLETE PACKAGE CHECK
+\RequirePackage[l2tabu,orthodox]{nag}
+
+%------------------------FONTS-------------------------------------------------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype} % better fonts/apperance
+\usepackage{bm} % boldface
+% -------------------MATH PACKAGES --------------------------------------
+\usepackage[binary-units=true]{siunitx} % SI units
+\usepackage{amssymb}  
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{mathtools}
+
+\usepackage{booktabs}
+% \usepackage[shortlabels]{enumitem}
+%----------------------------- GRAPHICS PACKAGES--------------------------
+
+\usepackage[]{geometry}
+\usepackage{graphicx} % for pdf, bitmapped graphics files
+\usepackage{subcaption} % make it possible to include more than one captioned figure/table in a single float
+\graphicspath{{./figures/}}% path to images
+
+% TIKZ
+\usepackage{pgfplots}
+\pgfplotsset{compat=newest}
+\usepgfplotslibrary{groupplots,external}
+\usepackage{tikz-3dplot}
+\usetikzlibrary{decorations.markings,decorations.pathreplacing,calc}
+\usetikzlibrary{decorations.shapes}
+\usetikzlibrary{plotmarks,positioning}
+\usetikzlibrary{arrows,arrows.meta,shapes,decorations.pathmorphing,fit}
+\usetikzlibrary{shadows.blur}
+\usetikzlibrary{tikzmark}
+\usepackage{environ}
+
+\tikzset{help lines/.style={very thin,color=gray!50}} % modify the help lines style
+\tikzset{->-/.style={decoration={
+  markings,
+  mark=at position .5 with {\arrow{>}}},postaction={decorate}}}
+  
+  \makeatletter
+\newsavebox{\measure@tikzpicture}
+\NewEnviron{scaletikzpicturetowidth}[1]{%
+  \def\tikz@width{#1}%
+  \def\tikzscale{1}\begin{lrbox}{\measure@tikzpicture}%
+  \BODY
+  \end{lrbox}%
+  \pgfmathparse{#1/\wd\measure@tikzpicture}%
+  \edef\tikzscale{\pgfmathresult}%
+  \BODY
+}
+\makeatother
+
+% Tikz macros
+% Draw an arc denoting an angle using start and delta angles
+\newcommand{\drawarcdelta}[4]{
+  \draw ($#1+(#2:#4)$) arc[start angle=#2, delta angle=#3, radius=#4];
+}
+
+% Draw an arc with label denoting an angle using start and delta angles
+\newcommand{\drawlabeledarcdelta}[6]{
+  \drawarcdelta{#1}{#2}{#3}{#4}
+  \node at ($#1+(#2+#3/2:#6)$) {#5};
+}
+%------------- CITATION PACKAGES------------------------------
+
+%\usepackage{listings}
+%\usepackage{accents}
+%\usepackage{overcite} % reference numbers appear as superscript exponents. Used by AAS
+% \usepackage{footnpag}   
+\usepackage{media9}
+\usepackage[]{animate} % for animated gif
+%\usepackage[]{biblatex}
+\usepackage[]{hyperref} % links to stuff
+\hypersetup{
+    bookmarks=true,         % show bookmarks bar?
+    unicode=false,          % non-Latin characters in Acrobat’s bookmarks
+    pdftoolbar=true,        % show Acrobat’s toolbar?
+    pdfmenubar=true,        % show Acrobat’s menu?
+    pdffitwindow=false,     % window fit to page when opened
+    pdfstartview={FitV},    % fits the width of the page to the window
+    pdftitle={},    % title
+    pdfauthor={Shankar Kulumani},     % author
+    pdfsubject={},   % subject of the document
+    pdfcreator={Shankar Kulumani},   % creator of the document
+    pdfproducer={Shankar Kulumani}, % producer of the document
+    pdfkeywords={}, % list of keywords
+    pdfnewwindow=true,      % links in new PDF window
+    colorlinks=false,       % false: boxed links; true: colored links
+    linkcolor=black,          % color of internal links (change box color with linkbordercolor)
+    citecolor=black,        % color of links to bibliography
+    filecolor=magenta,      % color of file links
+    urlcolor=black           % color of external links
+}
+% --------------------------------------
+% MUST BE AFTER HYPERREF!!!!!!!!!
+%------------------------------------------
+\usepackage[noabbrev,capitalize]{cleveref} % get fancy referencing
+
