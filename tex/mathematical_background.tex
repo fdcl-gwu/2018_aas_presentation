@@ -1,0 +1,114 @@
+% !TEX root = ../../defense.tex
+
+\section{System Model}
+
+\begin{frame}{Reference Frames}
+
+    \begin{columns}
+        \begin{column}{0.5\textwidth}
+            \begin{enumerate}
+                \item \( \vc{e}_i \in \R^3 \) : inertial reference frame fixed in space
+                \item \( \vc{f}_i \in \R^3 \) : small body fixed frame aligned with principle axes of the body
+                \item \( \vc{b}_i \in \R^3 \) : spacecraft fixed frame with \( b_1 \) aligned with the symmetry axis
+            \end{enumerate}
+            
+            \begin{block}{}
+                Spacecraft state is defined on the Special Euclidean group
+
+                \[ \parenth{R, \vc{x}} \in \SE \]
+            \end{block}
+        \end{column}
+        \begin{column}{0.5\textwidth}
+            \begin{scaletikzpicturetowidth}{2\columnwidth}
+                \resizebox{\columnwidth}{!}{%
+                \input{tikz/ref_frames.tikz}
+            }
+            \end{scaletikzpicturetowidth}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Spacecraft Model}
+    \begin{itemize}
+        \item Spacecraft modeled as a rigid dumbbell
+        \item Two masses \( m_1, m_2 \in \R^1 \) connected by a rigid massless link \( l \in \R^1\)
+        \item Effectively captures the mass distribution of a spacecraft
+    \end{itemize}
+
+    \resizebox{\textwidth}{!}{%
+        \input{tikz/dumbbell.tikz}
+    }
+\end{frame}
+\subsection{EOMs}
+
+
+
+\begin{frame}{Equations of Motion}
+    Hamilton's principle used to derive equations of motion in four forms:
+    \begin{enumerate}
+        \item Inertial vs. Relative 
+        \item Lagrangian vs. Hamiltonian
+    \end{enumerate}
+    True motion of the system is a stationary point of the action integral
+    \begin{align*}
+        \mathcal{G} &= \int_{t_0}^{t_f} T(\dot q) - V(q) dt\\
+        \pause
+        \delta \mathcal{G} &= \int_{t_0}^{t_f} \delta T - \delta V dt = 0
+    \end{align*}
+\end{frame}
+
+\begin{frame}{Inertial EOMs in Lagrangian Form}
+    The kinetic and potential energy of the dumbbell in the inertial frame
+    \begin{align*}
+        T\parenth{\dot{x}, \Omega} &= \frac{1}{2} m \norm{\dot{\vc{x}}}^2 + \frac{1}{2} \tr{\vh{\Omega} J_d \vh{\Omega}^T} , \\
+        V( x, R ) &=  - m_1 U \parenth{R_A^T \parenth{\vc{x} + R \vc{\rho}_1}} - m_2 U \parenth{R_A^T \parenth{\vc{x} + R \vc{\rho}_2}}. 
+    \end{align*}
+    \pause
+    The stationary point of the action integral gives:
+    \begin{align*}
+        \dot{x} &= v, \\
+        \parenth{m_1 + m_2} \dot{v} &= - \sum_{i=0}^2 m_i R_A \deriv{U}{z_i} + u_f, \\
+        \dot{R} &= R \Omega, \\
+        J \dot{\Omega} + \hat{\Omega} J \Omega &= \sum_{i=0}^2 m_i \hat{\rho}_i R^T R_A \deriv{U}{z_i} + u_m. 
+    \end{align*}
+\end{frame}
+
+\subsection{Gravity}
+
+\begin{frame}{Gravitational Models}
+    \begin{center}
+        \input{tikz/newton_gravity.tikz}
+    \end{center}
+    \pause
+    \begin{itemize}
+        \item Newton's law of gravity only applies to spherical bodies
+        \item Variety of methods to represent irregular bodies
+            \begin{itemize}
+                \item Spherical Harmonic - not valid when close to body
+                \item Constant Density Ellipsoid - only valid for ellipsoids
+                \item \Emph{Polyhedron Potential} - function of shape model 
+            \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Polyhedron Gravitation Model}
+
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\begin{itemize}
+    \item Polyhedron: solid with flat polygonal faces
+    \item Assumes a constant density
+    \item Gravity depends on the shape model
+\end{itemize}
+\end{column}
+\begin{column}{0.5\textwidth}
+    \resizebox{\columnwidth}{!}{%
+    \input{tikz/polyhedron_faces.tikz}
+}
+\end{column}
+\end{columns}
+\pause
+\begin{align*}
+    U(\vc{r}) =& \frac{1}{2} G \sigma \sum_{e \in \text{edges}} \vc{r}_e \cdot \vc{E}_e \cdot \vc{r}_e \cdot L_e - \frac{1}{2}G \sigma \sum_{f \in \text{faces}} \vc{r}_f \cdot \vc{F}_f \cdot \vc{r}_f \cdot \omega_f 
+\end{align*}
+\end{frame}
